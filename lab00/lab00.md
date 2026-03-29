@@ -1,9 +1,5 @@
 # Laboratorio 0 — Introducción a la Programación en C
 
-**Curso:** EIN423-B · Estructuras de Datos
-**Duración:** 90 minutos
-**Horario:** 08:30 – 10:00
-
 ## Objetivos del laboratorio
 
 - Compilar y ejecutar programas simples en C
@@ -16,18 +12,7 @@
 
 ---
 
-# Estructura de la clase
-
-| Hora | Actividad |
-|------|-----------|
-| 08:30 – 08:40 | Introducción: ¿Por qué C? |
-| 08:40 – 09:05 | Conceptos y código guiado |
-| 09:05 – 09:55 | Actividades prácticas |
-| 09:55 – 10:00 | Cierre |
-
----
-
-# 1. Introducción (08:30 – 08:40)
+# 1. Introducción
 
 C es un lenguaje de **bajo nivel controlado**: nos obliga a pensar en cómo funciona el computador (memoria, tipos, tamaño de datos), pero sin la complejidad del ensamblador. Es el lenguaje base de sistemas operativos, compiladores y prácticamente todas las estructuras de datos que estudiaremos este semestre.
 
@@ -41,7 +26,7 @@ Hoy daremos los primeros pasos: escribir, compilar y ejecutar programas en C, y 
 
 ---
 
-# 2. Conceptos y código guiado (08:40 – 09:05)
+# 2. Conceptos y código guiado
 
 ## 2.1 Estructura mínima de un programa en C
 
