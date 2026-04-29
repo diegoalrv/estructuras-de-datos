@@ -26,6 +26,10 @@ class Cuenta:
         # TODO: Validar que titular no esté vacío
         # TODO: Validar que saldo_inicial >= 0
         # TODO: Asignar self.titular y self._saldo
+        if len(titular) == 0:
+            raise ValueError("El titular no puede estar vacío.")
+        if saldo_inicial < 0:
+            raise ValueError("El saldo inicial no puede ser negativo.")
         pass
 
     def depositar(self, cantidad):
