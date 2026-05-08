@@ -1,63 +1,194 @@
 """
-SEMANA 3.2: Subclases KartPesado y KartLigero
-==============================================
+SEMANA 3: Karts Especializados - Herencia y Polimorfismo
+=======================================================
 
 OBJETIVO:
-Implementar especialización de karts mediante herencia.
+Crear subclases de Kart que heredan su funcionalidad base pero tienen
+comportamientos diferentes en la aceleración (polimorfismo).
 
 REQUISITOS:
-1. KartPesado(VehiculoBase): velocidad_max=150, acelera más (x1.2)
-2. KartLigero(VehiculoBase): velocidad_max=220, acelera menos (x0.8)
-3. Usar super().__init__() para llamar constructor padre
-4. Override método acelerar() para diferentes comportamientos
+1. KartPesado(Kart):
+   - velocidad_max = 150 km/h
+   - Acelera más fuerte (multiplicador 1.2)
+
+2. KartMedio(Kart):
+   - velocidad_max = 185 km/h
+   - Acelera normal (multiplicador 1.0)
+
+3. KartLigero(Kart):
+   - velocidad_max = 220 km/h
+   - Acelera más débil (multiplicador 0.8)
+
+HERENCIA:
+- Cada clase hereda de Kart usando: class KartPesado(Kart):
+- Usan super().__init__() para llamar al constructor del padre
+- Solo reescriben el método acelerar() con diferente comportamiento
+- Heredan todos los demás métodos (frenar, girar, actualizar_posicion, usar_turbo)
+
+POLIMORFISMO:
+- Aunque todos sean instancias de Kart, se comportan diferente
+- acelerar(50) da resultados distintos según el tipo
+- Se llama de la misma forma pero con diferente resultado
 
 ESTUDIANTE: Completa el código donde dice # TODO
 """
 
-# TODO: Importa VehiculoBase de vehiculo_base.py
-# from vehiculo_base import VehiculoBase
+from semana2.kart_metodos import Kart
 
 
-class KartPesado:
-    # TODO: class KartPesado(VehiculoBase):
-    pass
+class KartPesado(Kart):
+    """
+    Kart pesado: Lento pero con gran aceleración.
+    Ideal para personajes como Bowser, Donkey Kong.
+    - Velocidad máxima: 150 km/h
+    - Aceleración: x1.2 (50 → +60 km/h)
+    """
 
     def __init__(self, nombre):
-        # TODO: super().__init__(nombre, velocidad_max=150)
+        """
+        Inicializa un kart pesado.
+
+        Args:
+            nombre (str): Nombre del kart
+        """
+        # TODO: Usa super().__init__() para inicializar con:
+        # - nombre: el parámetro
+        # - velocidad_max: 150
+        # - color: "Verde"
         pass
 
     def acelerar(self, incremento):
-        # TODO: Acelera más: incremento * 1.2
+        """
+        El kart pesado acelera más fuerte.
+
+        Args:
+            incremento (float): Incremento base
+
+        Returns:
+            float: Nueva velocidad
+        """
+        # TODO: El kart pesado multiplica el incremento por 1.2
         # self.velocidad = min(self.velocidad + (incremento * 1.2), self.velocidad_max)
         # return self.velocidad
         pass
 
+    def __str__(self):
+        return f"🏋️ {self.nombre} (Pesado) | V.máx: {self.velocidad_max} km/h | Color: {self.color}"
 
-class KartLigero:
-    # TODO: class KartLigero(VehiculoBase):
-    pass
+
+class KartMedio(Kart):
+    """
+    Kart medio: Balance entre velocidad y aceleración.
+    Ideal para personajes como Mario, Luigi.
+    - Velocidad máxima: 185 km/h
+    - Aceleración: x1.0 (50 → +50 km/h)
+    """
 
     def __init__(self, nombre):
-        # TODO: super().__init__(nombre, velocidad_max=220)
+        """
+        Inicializa un kart medio.
+
+        Args:
+            nombre (str): Nombre del kart
+        """
+        # TODO: Usa super().__init__() para inicializar con:
+        # - nombre: el parámetro
+        # - velocidad_max: 185
+        # - color: "Amarillo"
         pass
 
     def acelerar(self, incremento):
-        # TODO: Acelera menos: incremento * 0.8
+        """
+        El kart medio acelera normal.
+
+        Args:
+            incremento (float): Incremento base
+
+        Returns:
+            float: Nueva velocidad
+        """
+        # TODO: El kart medio acelera sin multiplicador (x1.0)
+        # self.velocidad = min(self.velocidad + incremento, self.velocidad_max)
+        # return self.velocidad
+        pass
+
+    def __str__(self):
+        return f"🎮 {self.nombre} (Medio) | V.máx: {self.velocidad_max} km/h | Color: {self.color}"
+
+
+class KartLigero(Kart):
+    """
+    Kart ligero: Rápido pero con aceleración débil.
+    Ideal para personajes como Toad, Peach.
+    - Velocidad máxima: 220 km/h
+    - Aceleración: x0.8 (50 → +40 km/h)
+    """
+
+    def __init__(self, nombre):
+        """
+        Inicializa un kart ligero.
+
+        Args:
+            nombre (str): Nombre del kart
+        """
+        # TODO: Usa super().__init__() para inicializar con:
+        # - nombre: el parámetro
+        # - velocidad_max: 220
+        # - color: "Azul"
+        pass
+
+    def acelerar(self, incremento):
+        """
+        El kart ligero acelera más débil.
+
+        Args:
+            incremento (float): Incremento base
+
+        Returns:
+            float: Nueva velocidad
+        """
+        # TODO: El kart ligero multiplica el incremento por 0.8
         # self.velocidad = min(self.velocidad + (incremento * 0.8), self.velocidad_max)
         # return self.velocidad
         pass
 
+    def __str__(self):
+        return f"⚡ {self.nombre} (Ligero) | V.máx: {self.velocidad_max} km/h | Color: {self.color}"
 
+
+# ============================================================================
 # PRUEBAS
+# ============================================================================
+
 if __name__ == "__main__":
-    # TODO: Descomenta para validar
-    # pesado = KartPesado("Bowser")
-    # ligero = KartLigero("Toad")
-    #
-    # pesado.acelerar(100)
-    # ligero.acelerar(100)
-    #
-    # print(f"Pesado: {pesado.velocidad} / {pesado.velocidad_max}")
-    # print(f"Ligero: {ligero.velocidad} / {ligero.velocidad_max}")
-    # print("✅ Herencia funciona!")
-    pass
+    pesado = KartPesado("Bowser Kart")
+    medio = KartMedio("Mario Kart")
+    ligero = KartLigero("Toad Kart")
+
+    print("=== KARTS ESPECIALIZADOS ===")
+    print(pesado)
+    print(medio)
+    print(ligero)
+
+    print("\n=== PRUEBA DE ACELERACIÓN ===")
+    print("Acelerar 50 km/h para cada uno:")
+
+    pesado.acelerar(50)
+    print(f"  Pesado: {pesado.velocidad:.1f} km/h (50 × 1.2 = 60)")
+    assert pesado.velocidad == 60
+
+    medio.acelerar(50)
+    print(f"  Medio:  {medio.velocidad:.1f} km/h (50 × 1.0 = 50)")
+    assert medio.velocidad == 50
+
+    ligero.acelerar(50)
+    print(f"  Ligero: {ligero.velocidad:.1f} km/h (50 × 0.8 = 40)")
+    assert ligero.velocidad == 40
+
+    print("\n=== VALIDAR LÍMITES ===")
+    pesado.velocidad = 140
+    pesado.acelerar(50)  # 140 + 60 = 200, pero max es 150
+    assert pesado.velocidad == 150
+    print(f"  Pesado no supera max (150): {pesado.velocidad}")
+
+    print("\n✅ ¡Herencia y polimorfismo funcionan correctamente!")

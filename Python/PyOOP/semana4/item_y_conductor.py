@@ -1,108 +1,117 @@
 """
-SEMANA 4.2: Clases Item y Conductor (Composición)
-===================================================
+SEMANA 4.2: Clase Item - Elementos de Juego
+============================================
 
 OBJETIVO:
-Implementar items del juego y la composición Personaje+Kart (Conductor).
+Implementar los items que pueden recoger los personajes durante la carrera.
 
 REQUISITOS:
-
-ITEM:
 1. Item: tipo (str), bonus (int), activo (bool)
-2. Método activar(): marca como activo y aplica bonus
+
+2. Método activar():
+   - Marca el item como activo
+   - En un juego real, aplicaría el bonus al personaje
+
 3. Métodos: __str__()
 
-CONDUCTOR:
-Conductor es la composición de Personaje + Kart
-1. Conductor: personaje (Personaje), kart (Kart)
-2. Método manejar(incremento): delega a kart.acelerar()
-3. Método girar(angulo): delega a kart.girar()
-4. Método obtener_velocidad(): retorna kart.velocidad
-5. Método obtener_posicion(): retorna tupla (kart.posicion_x, kart.posicion_y)
+ITEMS EN MARIO KART:
+- Turbo: +velocidad temporal
+- Escudo: Protección contra ataques
+- Bomba: Daño a contrincantes
+- Super Salto: Acelerar en salto
+
+COMPOSICIÓN:
+- Personaje CONTIENE una lista de items (items = [])
+- Los items se agregan con personaje.recoger_item(item)
+- Los items se activan cuando se recogen
+
+NOTA:
+- La clase Conductor fue eliminada porque Personaje ya contiene el kart
+- Esto simplifica la arquitectura y evita redundancia
+- Los métodos que estaban en Conductor ahora se llaman directamente en Personaje/Kart
 
 ESTUDIANTE: Completa el código donde dice # TODO
 """
 
 
 class Item:
-    """Representa un item del juego que puede recoger un conductor."""
+    """Representa un item del juego que puede recoger un personaje."""
 
     def __init__(self, tipo, bonus):
-        # TODO: Inicializa atributos
-        # tipo, bonus, activo=False
+        """
+        Inicializa un item.
+
+        Args:
+            tipo (str): Tipo de item (ej: "Turbo", "Escudo", "Bomba")
+            bonus (int): Valor del bonus (ej: 50 para velocidad)
+        """
+        # TODO: Asigna los atributos
+        # - tipo, bonus
+        # - activo = False (se activa al recoger)
         pass
 
     def activar(self):
-        # TODO: Marca como activo (True)
+        """
+        Activa el item.
+        En un juego real, aplicaría el bonus al personaje que lo recogió.
+        """
+        # TODO: Marca el item como activo
+        # self.activo = True
         pass
 
     def __str__(self):
-        # TODO: Retorna string como: "🎁 {tipo} | Bonus: +{bonus}"
-        # Ej: "🎁 Turbo | Bonus: +50"
-        pass
+        """Representación del item."""
+        return f"🎁 {self.tipo} | Bonus: +{self.bonus}"
 
 
-class Conductor:
-    """Representa un conductor (composición de Personaje + Kart)."""
-
-    def __init__(self, personaje, kart):
-        # TODO: Asigna personaje y kart
-        # Además: items = []
-        pass
-
-    def manejar(self, incremento):
-        # TODO: Acelera el kart (delega a self.kart.acelerar(incremento))
-        # Retorna la nueva velocidad
-        pass
-
-    def girar(self, angulo):
-        # TODO: Gira el kart (delega a self.kart.girar(angulo))
-        # Retorna la nueva dirección
-        pass
-
-    def recoger_item(self, item):
-        # TODO: Agrega item a self.items y lo activa
-        # item.activar()
-        pass
-
-    def obtener_velocidad(self):
-        # TODO: Retorna self.kart.velocidad
-        pass
-
-    def obtener_posicion(self):
-        # TODO: Retorna tupla (self.kart.posicion_x, self.kart.posicion_y)
-        pass
-
-    def __str__(self):
-        return f"🏎️ {self.personaje.nombre} | V: {self.obtener_velocidad()} km/h | Items: {len(self.items)}"
+# ============================================================================
+# EXTENSIÓN: Métodos helpers para Personaje (agregados a clase Personaje)
+# ============================================================================
+# Estos métodos se agregan a la clase Personaje para trabajar con items:
+#
+# def recoger_item(self, item):
+#     """Recoge un item y lo activa."""
+#     self.items.append(item)
+#     item.activar()
+#
+# def listar_items(self):
+#     """Lista todos los items que tiene el personaje."""
+#     if not self.items:
+#         print(f"  {self.nombre} no tiene items")
+#     else:
+#         print(f"  Items de {self.nombre}:")
+#         for item in self.items:
+#             print(f"    - {item}")
 
 
+# ============================================================================
 # PRUEBAS
+# ============================================================================
+
 if __name__ == "__main__":
-    # TODO: Descomenta para validar
-    # from kart import Kart
-    # from personaje import Personaje
-    #
-    # mario = Personaje("Mario", "Guerrero", 100, 100, 50, 50)
-    # mario_kart = Kart("Mario", 200, "Rojo")
-    # conductor = Conductor(mario, mario_kart)
-    #
-    # # Prueba manejar
-    # conductor.manejar(50)
-    # assert conductor.obtener_velocidad() == 50
-    # print(f"✓ Velocidad: {conductor.obtener_velocidad()}")
-    #
-    # # Prueba girar
-    # conductor.girar(45)
-    # assert conductor.kart.direccion == 45
-    # print(f"✓ Dirección: {conductor.kart.direccion}")
-    #
-    # # Prueba items
-    # turbo = Item("Turbo", 50)
-    # conductor.recoger_item(turbo)
-    # assert len(conductor.items) == 1
-    # assert turbo.activo == True
-    # print(f"✓ Item recogido: {turbo}")
-    #
-    # print("✅ Conductor y Item funcionan!")
-    pass
+    from semana1.personaje import Personaje
+    from semana3.karts_especializados import KartLigero
+
+    # Crea personaje
+    toad = Personaje("Toad", "Ligero", 90, 70)
+    toad_kart = KartLigero("Toad Kart")
+    toad.asignar_kart(toad_kart)
+    toad.items = []  # Inicializa lista de items
+
+    # Crea items
+    turbo = Item("Turbo", 50)
+    escudo = Item("Escudo", 100)
+
+    print("=== ITEMS ===")
+    print(f"Turbo creado: {turbo}")
+    print(f"Escudo creado: {escudo}")
+
+    # Recoge items (usando append directo en este ejemplo)
+    toad.items.append(turbo)
+    turbo.activar()
+
+    assert len(toad.items) == 1
+    assert turbo.activo == True
+    print(f"\n✓ {toad.nombre} recogió: {turbo}")
+
+    print("\n✅ Items funcionan correctamente!")
